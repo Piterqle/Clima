@@ -39,11 +39,11 @@ function getLocationInfo() {
             .catch(function (error) {
                 console.log("Error fetching location data:", error);
             });
-            const response = axios.get(`https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&daily=weather_code,windspeed_10m_max,temperature_2m_max,temperature_2m_min,precipitation_sum&forecast_days=7&timezone=auto`)
+            const response = axios.get(`https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&daily=weather_code,windspeed_10m_max,winddirection_10m_dominant,temperature_2m_max,temperature_2m_min,precipitation_sum,precipitation_probability_max&hourly=relativehumidity_2m&forecast_days=7&timezone=auto`)
             .then(function (response) {
                 console.log(response.data);
                 const daily = response.data.daily;
-                const humidity = daily.humidity;
+                const humidity = response.data.hourly.relativehumidity_2m;
                 const windSpeed = daily.windspeed_10m_max;
                 const weatherCode = daily.weather_code;
                 const temperature = daily.temperature_2m_max;
@@ -53,7 +53,10 @@ function getLocationInfo() {
                 document.getElementById('date').innerText = dateFormatter(dates[0]);
                 document.getElementById('temperature').innerText = `${temperature[0]}°C`;
                 document.getElementById('description').innerText = `${weatherCodeMap[weatherCode[0]]} - ${temperature[0]}°C / ${temperatureMin[0]}°C` || "Descrição indisponível";
-                document.getElementById('windSpeed').innerText = `Velocidade do Vento: ${windSpeed[0]} m/s`;
+                document.getElementById('windSpeed').innerHTML = `Velocidade do Vento: <br> ${windSpeed[0]} m/s`;
+                document.getElementById('probability').innerHTML = `Chuva: <br> ${daily.precipitation_probability_max[0]}%`;
+                document.getElementById('humidity').innerHTML = `Umidade: <br> ${humidity[0]}%`;
+                document.getElementById('direction').innerHTML = `Direção: <br> ${daily.winddirection_10m_dominant[0]}°`;
 
                 for (let i = 0; i < dates.length; i++) {
                     const date = dates[i];
