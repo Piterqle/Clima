@@ -22,7 +22,7 @@ const day = (date, tempMax, tempMin) => {
 function getLocationInfo() {
     var modal = new bootstrap.Modal(document.getElementById('locationModal'));
     if(!navigator.geolocation) {
-        console.log("Geolocation is not supported by your browser");
+        alert("Geolocation is not supported by your browser");
         return;
     }
     navigator.geolocation.getCurrentPosition(
@@ -37,11 +37,10 @@ function getLocationInfo() {
             }
                     )       
             .catch(function (error) {
-                console.log("Error fetching location data:", error);
+                alert("Error fetching location data:", error);
             });
             const response = axios.get(`https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&daily=weather_code,windspeed_10m_max,winddirection_10m_dominant,temperature_2m_max,temperature_2m_min,precipitation_sum,precipitation_probability_max&hourly=relativehumidity_2m&forecast_days=7&timezone=auto`)
             .then(function (response) {
-                console.log(response.data);
                 const daily = response.data.daily;
                 const humidity = response.data.hourly.relativehumidity_2m;
                 const windSpeed = daily.windspeed_10m_max;
@@ -67,12 +66,12 @@ function getLocationInfo() {
                 }
             })
             .catch(function (error) {
-                console.log("Error fetching location data:", error);
+                alert("Error fetching location data:", error);
             });
         },
         function() {
             modal.show();
-            console.log("Erro em recuperar sua localização");
+            
         }
     );
 }
