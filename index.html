@@ -6,10 +6,14 @@
     <title>Clima</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/weather-icons/2.0.10/css/weather-icons.min.css" />
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/weather-icons/2.0.10/css/weather-icons-wind.min.css" />
 </head>
-<body class="bg-dark">
+<body class="bg-dark align-items-center d-flex vh-100">
     
-    <div class="container mt-5">
+    <div class="container ">
         <div class="row justify-content-center">
             <div class="col-md-6">
                 <!-- container relativo para permitir sobreposição do card -->
@@ -17,7 +21,10 @@
                     <div class="card p-4 main-card bg-white bg-opacity-10">
                         <div class="mb-3 card-body text-white">
                             <h5 class="card-subtitle text-white fst-italic" id="city">Sem Localização</h5>
-                            <h1 class="text-white card-title" id="temperature">--C°</h1>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <h1 class="text-white card-title" id="temperature">--C°</h1>
+                                <i class="wi wi-na" id="weatherIcon" style="font-size: 50px; color: cadetblue;"></i>
+                            </div>
                             <p class=" card-subtitle text-white fst-italic" id="date">--/--/----</p>
                             <p class="card-text text-white fst-italic" id="description">--</p>
                         </div>
@@ -27,25 +34,29 @@
                                     <div class="col-md-6 mb-4">
                                         <div class="row mb-2">
                                             <div class="col-6">
-                                                <div class="card mb-2 bg-white bg-opacity-10 p-2 text-white" style="height: 100px;">
+                                                <div class="card mb-2 bg-white bg-opacity-10 p-2 text-white d-flex align-items-center" style="height: 125px;">
                                                     <p class="card-text fst-italic" id="humidity">Umidade: <br> --%</p>
+                                                    <i class="wi wi-humidity" style="font-size: 20px;"></i>
                                                 </div>
                                             </div>
                                             <div class="col-6 text-end">
-                                                <div class="card bg-white bg-opacity-10 p-2 text-white" style="height: 100px;">
+                                                <div class="card bg-white bg-opacity-10 p-2 text-white d-flex align-items-center" style="height: 125px;">
                                                     <p class="card-text text-start  fst-italic" id="probability">Probabilidade: <br> -- mm</p>
+                                                    <i class="wi wi-raindrop" style="font-size: 20px;"></i>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="row mb-2">
                                             <div class="col-6">
-                                                <div class="card mb-2 bg-white bg-opacity-10 p-2 text-white " style="height: 100px;">
+                                                <div class="card mb-2 bg-white bg-opacity-10 p-2 text-white d-flex align-items-center" style="height: 125px;">
                                                     <p class="card-text fst-italic" id="windSpeed">Velocidade do Vento: <br> -- m/s</p>
+                                                    <i class="wi wi-strong-wind" style="font-size: 20px;"></i>
                                                 </div>
                                             </div>
                                             <div class="col-6 text-end">
-                                                <div class="card bg-white bg-opacity-10 p-2 text-white " style="height: 100px;">
+                                                <div class="card bg-white bg-opacity-10 p-2 text-white d-flex align-items-center" style="height: 125px;">
                                                     <p class="card-text text-start fst-italic" id="direction">Direção: <br> --</p>
+                                                    <i class="wi wi-wind-direction" style="font-size: 20px;"></i>
                                                 </div>
                                             </div>
                                         </div>

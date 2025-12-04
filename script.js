@@ -1,5 +1,25 @@
-const weatherCodeMap = {
-  0: "Céu limpo",1: "Parcialmente nublado",2: "Poucas nuvens",3: "Muito nublado",45: "Névoa",48: "Névoa com deposição (nevoeiro congelante)",51: "Garoa fraca",53: "Garoa moderada",55: "Garoa forte",56: "Garoa congelante fraca",57: "Garoa congelante forte",61: "Chuva fraca",63: "Chuva moderada",65: "Chuva forte",66: "Chuva congelante fraca",67: "Chuva congelante forte",71: "Neve fraca",73: "Neve moderada",75: "Neve forte",77: "Grãos de neve",80: "Pancadas de chuva fracas",81: "Pancadas de chuva moderadas",82: "Pancadas de chuva fortes",85: "Pancadas de neve fracas",86: "Pancadas de neve fortes",95: "Tempestade",96: "Tempestade com granizo fraco",99: "Tempestade com granizo forte"
+const weatherCodesMap = {
+      0:  { desc: "Céu limpo",                         icon: "wi-day-sunny" },
+      1:  { desc: "Predomínio de sol",                 icon: "wi-day-sunny-overcast" },
+      2:  { desc: "Parcialmente nublado",             icon: "wi-day-cloudy" },
+      3:  { desc: "Nublado",                           icon: "wi-cloud" },
+      45: { desc: "Neblina",                           icon: "wi-fog" },
+      48: { desc: "Neblina gelada",                   icon: "wi-fog" },
+      51: { desc: "Garoa leve",                        icon: "wi-sprinkle" },
+      53: { desc: "Garoa moderada",                    icon: "wi-sprinkle" },
+      55: { desc: "Garoa intensa",                     icon: "wi-showers" },
+      61: { desc: "Chuva fraca",                       icon: "wi-rain" },
+      63: { desc: "Chuva moderada",                    icon: "wi-rain" },
+      65: { desc: "Chuva forte",                       icon: "wi-heavy-showers" },
+      80: { desc: "Pancada de chuva fraca",            icon: "wi-showers" },
+      81: { desc: "Pancada de chuva moderada",         icon: "wi-showers" },
+      82: { desc: "Pancada de chuva forte",            icon: "wi-storm-showers" },
+      71: { desc: "Neve leve",                         icon: "wi-snow" },
+      73: { desc: "Neve moderada",                     icon: "wi-snow" },
+      75: { desc: "Neve forte",                        icon: "wi-snow-wind" },
+      95: { desc: "Trovoadas",                         icon: "wi-thunderstorm" },
+      96: { desc: "Trovoadas com granizo fraco",       icon: "wi-hail" },
+      99: { desc: "Trovoadas com granizo forte",       icon: "wi-hail" }
 };
 
 const weeklyContainer = document.getElementById('weeklyContainer');
@@ -49,9 +69,10 @@ function getLocationInfo() {
                 const temperatureMin = daily.temperature_2m_min;    
                 const dates = daily.time;
                 
+                document.getElementById('weatherIcon').className = `wi ${weatherCodesMap[weatherCode[0]].icon}`;    
                 document.getElementById('date').innerText = dateFormatter(dates[0]);
                 document.getElementById('temperature').innerText = `${temperature[0]}°C`;
-                document.getElementById('description').innerText = `${weatherCodeMap[weatherCode[0]]} - ${temperature[0]}°C / ${temperatureMin[0]}°C` || "Descrição indisponível";
+                document.getElementById('description').innerText = `${weatherCodesMap[weatherCode[0]].desc} - ${temperature[0]}°C / ${temperatureMin[0]}°C` || "Descrição indisponível";
                 document.getElementById('windSpeed').innerHTML = `Velocidade do Vento: <br> ${windSpeed[0]} m/s`;
                 document.getElementById('probability').innerHTML = `Chuva: <br> ${daily.precipitation_probability_max[0]}%`;
                 document.getElementById('humidity').innerHTML = `Umidade: <br> ${humidity[0]}%`;
